@@ -20,7 +20,13 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    @PostMapping
+    @GetMapping("/book/{id}")
+    public Book getBookById(@PathVariable Long id) {
+        System.out.println("Id is: "+id);
+        return bookService.getBookById(id);
+    }
+
+    @PostMapping("/api/books")
     public Book addBook(@RequestBody Book book) {
         return bookService.saveBook(book);
     }
