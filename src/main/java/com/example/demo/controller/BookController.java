@@ -5,6 +5,11 @@ import com.example.demo.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/api/books")
@@ -26,9 +31,14 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping("/api/books")
+    @PostMapping
     public Book addBook(@RequestBody Book book) {
         return bookService.saveBook(book);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Book> updateEntry(@PathVariable Long id, @RequestBody Book book) {    
+        return bookService.updateEntry(id, book);
     }
 
     @DeleteMapping("/{id}")
